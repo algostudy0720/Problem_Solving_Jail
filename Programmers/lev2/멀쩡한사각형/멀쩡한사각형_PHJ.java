@@ -19,7 +19,7 @@ public class 멀쩡한사각형 {
 	public static long solution(int x, int y) {
         long answer = 0;
         for (int i = 0; i < x; i++) {// axis ->
-            answer += y * i / x;	 //그래프 영역 더해준다
+            answer += y * i / x;//그래프 영역 더해준다
         }
         return answer * 2; //그래프 윗부분도 더함
     }
