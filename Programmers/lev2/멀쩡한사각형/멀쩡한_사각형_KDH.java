@@ -9,26 +9,26 @@ public class 멀쩡한_사각형 {
 
 	public static long solution(int w, int h) {
 		long answer = 0;
-		int a = 0, b = 0, temp = 0;
+		long a = 0, b = 0, temp = 0;
 		if(w >= h) {
-			a = w;
-			b = h;
+			a = (long)w;
+			b = (long)h;
 		}
 		else {
-			a = h;
-			b = w;
+			a = (long)w;
+			b = (long)h;
 		}
 		
-//		for (int i = b; i > 0; i--) {
-//			if(a % i == 0 && b % i == 0) {
-//				temp = i;
-//				break;
-//			}
-//		}
-		temp = a % b;
+        
+		for (long i = b; i > 0; i--) {
+			if(a % i == 0 && b % i == 0) {
+				temp = i;
+				break;
+			}
+		}
 		
-		answer = (w*h)-(w+h-temp);
-		System.out.println(answer);
+        
+		answer = ((long)w*(long)h)-((long)w+(long)h-temp);
 		return answer;
 	}
 }
