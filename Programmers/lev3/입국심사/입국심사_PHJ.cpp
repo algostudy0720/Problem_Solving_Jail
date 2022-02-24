@@ -27,7 +27,7 @@ long long solution(int n, vector<int> times) {
 }
 
 /* 
-시간초과나는 자바 코드 : 
+시간초과나는 자바 풀이 - PriorityQueue로 풀이
 import java.util.*;
 
 class Solution {
