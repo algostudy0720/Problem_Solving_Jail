@@ -1,7 +1,6 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
-#include <algorithm>
 #include <iostream>
 
 using namespace std;
@@ -12,8 +11,7 @@ ACD 111 110 101 011 ....
 */
 
 unordered_map<string,int> combi_map;//조합, 주문 횟수
-int cnt[27];//index = 길이, element= 최대 cnt
-vector<pair<string, int>> menu;//조합, 길이
+
 
 /*string : 조합, int : cnt 횟수*/
 bool compare(pair<string, int> a , pair<string,int>b){
@@ -23,15 +21,14 @@ bool compare(pair<string, int> a , pair<string,int>b){
 void dfs(string order , string result, int index, int depth){
     if(result.size()  == depth ) 
     {
-        if(depth>=2)combi_map[result]++;
+        combi_map[result]++;
     }
     for(int i = index ; i<order.size() ; i++)
     {
         result.push_back(order[i]);
-        dfs(order, result, i+1 ,depth +1 );
+        dfs(order, result, i+1 ,depth);
         result.pop_back();
     }
-    
 }
 
 vector<string> solution(vector<string> orders, vector<int> course) {
@@ -40,15 +37,15 @@ vector<string> solution(vector<string> orders, vector<int> course) {
     for(auto o : orders)
     {
         sort(o.begin(), o.end()) ;//ABC CBA
-        dfs(o,"",0,0);    
+        for(auto c : course) dfs(o,"",0,c);//전체 -> course만큼만..    
     }
-    ///for(auto s : combi_map) cout<<s.first<<" "<<s.second<<endl;
+    //for(auto s : combi_map) cout<<s.first<<" "<<s.second<<endl;
     
     //sort
     vector<pair<string,int>>sorted;
     for(auto s : combi_map)  if(s.second>1) sorted.push_back({s.first, s.second});//최소 두명 이상 사야함
     sort(sorted.begin(), sorted.end(), compare);//cnt순으로 정렬
-    //for(auto s : sorted) cout<<s.first<<" "<<s.second<<endl;
+    for(auto s : sorted) cout<<s.first<<" "<<s.second<<endl;
     
     //course 에 대해 가장 많이 먹은 요리
     for(auto c : course)
